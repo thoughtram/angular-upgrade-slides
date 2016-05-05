@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Angular Master Class extended - Upgrading to Angular 2 | thoughtram</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="thoughtram">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/thoughtram.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <!-- <link rel="stylesheet" href="lib/css/zenburn.css"> -->
+    <style>
+      foo-code {
+        padding: 0.8em;
+        background: #eee;
+        display: block;
+        color: #aaa;
+      }
+      .reveal h4.job-title-no {
+        font-weight: bold;
+        font-size: 6em;
+        -webkit-transform: rotate(-14deg);
+        margin: 0;
+        color: maroon;
+        position: absolute;
+        font-family: impact;
+        top: 0.5em;
+        left: 0em;
+        text-shadow: 5px 4px 1px rgba(0, 0, 0, 0.8);
+        letter-spacing: 3px;
+        border: 10px solid maroon;
+        border-radius: 0.3em;
+        padding:  0.3em 1em;
+        box-shadow: inset 0px 0px 177px red;
+        line-height: 1.2em;
+      }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <script src="vendor/angular.js"></script>
+  </head>
+
+  <body ng-app="slides">
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section class="deck-slide" data-background-image="/img/thoughtram-polygons.png" background-repeat="no-repeat">
+          <h1>Angular Upgrade Workshop</h1>
+          <h3>By @thoughtram</h3>
+        </section>
+
+        <section class="about-slide">
+          <h2>About us</h2>
+          <div class="about">
+            <img width="250" height="250" alt="Christoph" src="img/christoph.png">
+            <h3>Christoph Burgdorf</h3>
+            <h3><a href="http://twitter.com/cburgdorf">@cburgdorf</a></h3>
+          </div>
+          <div class="about">
+            <img width="250" height="250" alt="Pascal" src="img/pascal.jpeg">
+            <h3>Pascal Precht</h3>
+            <h3><a href="http://twitter.com/PascalPrecht">@PascalPrecht</a></h3>
+          </div>
+        </section>
+
+        <section class="sub-section-slide" data-background-transition="slide" data-background="#80B4C4">
+          <h2>Todays plans</h2>
+        </section>
+
+        <section>
+          <h2>Demo</h2>
+        </section>
+
+        <section>
+          <p style="font-size: 1.2em;">We will focus on upgrading an existing (legacy) app by example.</p>
+        </section>
+
+        <section class="sub-section-slide" data-background-transition="slide" data-background="#80B4C4">
+          <h2>Upgrading</h2>
+        </section>
+
+        <section class="image-slide">
+          <img class="fragment" src="images/upgrade-2-phases.svg">
+        </section>
+
+        <section class="image-slide">
+          <img src="images/upgrade-2-phases-2.svg">
+        </section>
+
+        <section class="image-slide">
+          <img src="images/upgrade-2-phases-3.svg">
+        </section>
+
+        <section>
+          <h2>Preparing the upgrade</h2>
+
+          <p>There some things we can do today to make upgrading our application easier:</p>
+          <ul style="margin-top: 1em;">
+            <li class="fragment">Layer application by <strong>feature/component</strong>, use mutiple modules</li>
+            <li class="fragment">Use <code>.service()</code> instead of <code>.factory()</code></li>
+            <li class="fragment">Write <strong>new components</strong> in ES2015 or TypeScript</li>
+          </ul>
+        </section>
+
+        <section class="sub-section-slide" data-background-transition="slide" data-background="#80B4C4">
+          <h2>Upgrade Strategies</h2>
+        </section>
+
+        <section>
+          <div class="fragment">
+            <h2>Upgrade Strategies</h2>
+
+            <p>There are two different ways of how to upgrade an existing app to Angular 2:</p>
+
+            <ul style="margin-top: 1em;">
+              <li class="fragment"><strong>Big Bang&trade;</strong> - Start a spike in Angular 2 and replace entire app once done</li>
+              <li class="fragment"><strong>Incremental</strong> - Upgrade existing app one service or component at a time</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Big Bang&trade;</h2>
+        </section>
+
+        <section class="image-slide">
+          <img src="images/building-blocks-7.svg">
+          <h4 class="job-title-no fragment current-visible">Bang!</h4>
+        </section>
+
+        <section class="image-slide">
+          <img src="images/building-blocks-6.svg">
+        </section>
+
+        <section>
+          <h2>Incremental Upgrade</h2>
+        </section>
+
+        <section class="image-slide">
+          <img src="images/building-blocks-7.svg">
+        </section>
+
+        <section class="image-slide">
+          <img src="images/building-blocks-8.svg">
+        </section>
+
+        <section class="image-slide">
+          <img src="images/building-blocks-9.svg">
+        </section>
+
+        <section class="sub-section-slide" data-background-transition="slide" data-background="#80B4C4">
+          <h2>Upgrading using ngUpgrade</h2>
+        </section>
+
+        <section>
+          <div class="fragment">
+          <h2>Angular 1 + 2 together</h2>
+
+          <p>For this to work, <strong>four things</strong> need to interoperate between Angular 1 and Angular 2:</p>
+
+          <ul>
+            <li class="fragment"><strong>Dependency Injection</strong> - Exposing Angular 2 service into Angular 1 and vice-versa</li>
+            <li class="fragment"><strong>Component Nesting + Transcusion</strong> - Angular 1 directives with transclusion use Angular 2 components with content projection</li>
+            <li class="fragment"><strong>Change Detection</strong> - Angular 1 scope digest and Change Detectors in Angular 2 components are interleaved</li>
+          </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Typical upgrade process</h2>
+
+          <ol>
+            <li class="fragment">Include Angular 2 and upgrade module</li>
+            <li class="fragment">Pick component to upgrade and change its template/controller</li>
+            <li class="fragment">Export (Angular 2) component in Angular 1 app</li>
+            <li class="fragment">Pick service to upgrade</li>
+            <li class="fragment">Repeat step 2 and 3</li>
+            <li class="fragment">Replace Angular 1 bootstrap with Angular 2 bootstrap</li>
+          </ol>
+        </section>
+
+        <section class="sub-section-slide" data-background-transition="slide" data-background="#80B4C4">
+          <h2>Bootstrapping</h2>
+        </section>
+
+        <section>
+          <pre class="fragment" ng-non-bindable style="font-size: 0.75em; line-height: 40px;"><code>import {UpgradeAdapter} from '@angular2/upgrade';
+export const upgradeAdapter = new UpgradeAdapter();
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.75em; line-height: 40px;"><foo-code>import {<span style="color: #000;">UpgradeAdapter</span>} from <span style="color: #000;">'@angular2/upgrade'</span>;
+export const upgradeAdapter = <span style="color: #000;">new UpgradeAdapter();</span>
+</foo-code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.75em; line-height: 40px;"><code>import {upgradeAdapter} from 'upgrade-adapter';
+
+angular.module('contacts-app', [...]);
+
+upgradeAdapter
+  .bootstrap(document.body, ['contacts-app']);
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.75em; line-height: 40px;"><foo-code>import {<span style="color: #000;">upgradeAdapter</span>} from 'upgrade-adapter';
+
+angular.module('contacts-app', [...]);
+
+<span style="color: #000;">upgradeAdapter
+  .bootstrap(document.body, ['contacts-app']);</span>
+</foo-code></pre>
+        </section>
+
+        <section class="statement-slide" data-background="#123742">
+          <h3 style="margin-left: 0.5em;">Demo: Bootstrapping</h3>
+          <h3 style="font-size: 1em; margin-top: 1em;margin-left: 0.6em; font-family: monospace;">$ git checkout step-1</h3>
+        </section>
+
+        <section class="sub-section-slide" data-background-transition="slide" data-background="#80B4C4">
+          <h2>Downgrading A2 Components</h2>
+        </section>
+
+        <section>
+            <pre class="fragment" ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>@Component({
+  selector: 'contacts-list-item-component',
+  template: `
+    &lt;a href="#/contact/{{contact.id}}"&gt;
+      &lt;img [src]="contact.image"&gt;
+      &lt;span&gt;{{contact.name}}&lt;/span&gt;
+    &lt;/a&gt;
+  `
+})
+export class ContactsListItemComponent {
+  @Input() contact: Contact;
+}
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>import {upgradeAdapter} from 'upgrade-adapter';
+import {ContactsListItemComponent} from '...';
+
+angular.module('contacts-list-item-component')
+
+.directive('contactsListItemComponent',
+  upgradeAdapter
+    .downgradeNg2Component(ContactsListItemComponent)
+);
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code><span style="color: #000;">import {upgradeAdapter} from 'upgrade-adapter';
+import {ContactsListItemComponent} from '...';</span>
+
+angular.module('contacts-list-item-component')
+
+.directive('contactsListItemComponent',
+  upgradeAdapter
+    .downgradeNg2Component(ContactsListItemComponent)
+);
+</foo-code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code>import {upgradeAdapter} from 'upgrade-adapter';
+import {ContactsListItemComponent} from '...';
+
+angular.module('contacts-list-item-component')
+
+<span style="color: #000;">.directive('contactsListItemComponent',
+  upgradeAdapter
+    .downgradeNg2Component(ContactsListItemComponent)
+);</span>
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>angular.module('contacts-app', [
+  ...
+  'contacts-list-item-component'
+]);</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>&lt;ul&gt;
+  &lt;li ng-repeat="contact in contacts"&gt;
+
+    &lt;contact-list-item-component [contact]="contact"&gt;
+    &lt;/contact-list-item-component&gt;
+
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code>&lt;ul&gt;
+  &lt;li ng-repeat="<span style="color: #000;">contact</span> in contacts"&gt;
+
+    &lt;contact-list-item-component <span style="color: #000;">[contact]="contact"</span>&gt;
+    &lt;/contact-list-item-component&gt;
+
+  &lt;/li&gt;
+&lt;/ul&gt;</foo-code></pre>
+        </section>
+
+        <section class="statement-slide" data-background="#123742">
+          <h3 style="margin-left: 0.5em;">Demo: Downgrading A2 Component</h3>
+          <h3 style="font-size: 1em; margin-top: 1em;margin-left: 0.6em; font-family: monospace;">$ git checkout step-2</h3>
+          <h3 style="font-size: 1em; margin-top: 0.5em;margin-left: 0.6em; font-family: monospace;">...</h3>
+          <h3 style="font-size: 1em; margin-top: 0.5em;margin-left: 0.6em; font-family: monospace;">$ git checkout step-3</h3>
+        </section>
+
+        <section class="sub-section-slide" data-background-transition="slide" data-background="#80B4C4">
+          <h2>Upgrading A1 Components</h2>
+        </section>
+
+        <section>
+          <pre class="fragment" ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>angular.module('zippy-component', [])
+
+.component('zippyComponent', {
+  templateUrl: '...',
+  transclude: true,
+  bindings: {
+    closed: '&lt;',
+    title: '@',
+    toggle: '&'
+  },
+  controller: function () { ... }
+})
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>
+          
+          
+          
+          
+@Component({
+  selector: 'contact-detail-component',
+  templateUrl: '...',
+
+})
+export class ContactDetailComponent {
+  ...
+}
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>import {upgradeAdapter} from 'upgrade-adapter';
+
+const ZippyComponent = 
+  upgradeAdapter.upgradeNg1Component('zippyComponent');
+
+@Component({
+  selector: 'contact-detail-component',
+  templateUrl: '...',
+  directives: [ZippyComponent]
+})
+export class ContactDetailComponent {
+  ...
+}
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code>import {<span style="color: #000;">upgradeAdapter</span>} from 'upgrade-adapter';
+
+<span style="color: #000;">const ZippyComponent = 
+  upgradeAdapter.upgradeNg1Component('zippyComponent');</span>
+
+@Component({
+  selector: 'contact-detail-component',
+  templateUrl: '...',
+  <span style="color: #000;">directives: [ZippyComponent]</span>
+})
+export class ContactDetailComponent {
+  ...
+}
+</foo-code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>&lt;zippy-component
+  [title]="zippyCaption"
+  (toggle)="toggleCaption($event.closed)"&gt;
+&lt;/zippy-component&gt;</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code>&lt;zippy-component
+  <span style="color: #000;">[title]="zippyCaption"
+  (toggle)="toggleCaption($event.closed)"</span>&gt;
+&lt;/zippy-component&gt;</foo-code></pre>
+        </section>
+
+        <section class="statement-slide" data-background="#123742">
+          <h3 style="margin-left: 0.5em;">Demo: Upgrading A1 Component</h3>
+          <h3 style="font-size: 1em; margin-top: 1em;margin-left: 0.6em; font-family: monospace;">$ git checkout step-4</h3>
+        </section>
+
+        <section class="sub-section-slide" data-background-transition="slide" data-background="#80B4C4">
+          <h2>Upgrading A1 Providers</h2>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>
+
+
+@Component()
+export class ContactDetailComponent {
+
+  contact: Contact;
+
+  constructor() {
+    this.contact = 
+      contactsService.getContact($routeParams.id);
+  }
+}
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code>
+
+
+@Component()
+export class ContactDetailComponent {
+
+  contact: Contact;
+
+  constructor() {
+    this.contact = 
+      <span style="color: #000;">contactsService</span>.getContact(<span style="color: #000;">$routeParams</span>.id);
+  }
+}
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>upgradeAdapter.upgradeNg1Provider('contactsService');
+upgradeAdapter.upgradeNg1Provider('$routeParams');
+
+@Component()
+export class ContactDetailComponent {
+
+  contact: Contact;
+
+  constructor(
+    @Inject('contactsService') contactsService,
+    @Inject('$routeParams') $routeParams) {
+    this.contact = 
+      contactsService.getContact($routeParams.id);
+  }
+}
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code><span style="color: #000;">upgradeAdapter.upgradeNg1Provider('contactsService');
+upgradeAdapter.upgradeNg1Provider('$routeParams');</span>
+
+@Component()
+export class ContactDetailComponent {
+
+  contact: Contact;
+
+  constructor(
+    <span style="color: #000;">@Inject('contactsService') contactsService,
+    @Inject('$routeParams') $routeParams</span>) {
+    this.contact = 
+      contactsService.getContact($routeParams.id);
+  }
+}
+</foo-code></pre>
+        </section>
+
+        <section class="statement-slide" data-background="#123742">
+          <h3 style="margin-left: 0.5em;">Demo: Upgrading A1 Providers</h3>
+          <h3 style="font-size: 1em; margin-top: 1em;margin-left: 0.6em; font-family: monospace;">$ git checkout step-5</h3>
+        </section>
+
+        <section class="sub-section-slide" data-background-transition="slide" data-background="#80B4C4">
+          <h2>Downgrading A2 Providers</h2>
+        </section>
+
+        <section>
+          <pre class="fragment" ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>import {Injectable} from '@angular/core';
+          
+@Injectable()
+class ContactsService {
+
+  private CONTACT_DATA = [...];
+
+  getContacts() {
+    return this.CONTACT_DATA;
+  }
+
+  getContact(id: string) {
+    return this.CONTACT_DATA
+      .find(contact => contact.id === id);
+  }
+}</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>import {upgradeAdapter} from 'upgrade-adapter';
+
+angular.module('contacts-service', [])
+
+.service('contactsService',
+  upgradeAdapter.downgradeNg2Provider(ContactsService)
+);
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code>import {<span style="color: #000;">upgradeAdapter</span>} from 'upgrade-adapter';
+
+angular.module('contacts-service', [])
+
+.service('contactsService',
+  <span style="color: #000;">upgradeAdapter.downgradeNg2Provider(ContactsService)</span>
+);
+</foo-code></pre>
+        </section>
+
+        <section>
+          <h3>How do we inject ContactsService in A2 components now?</h3>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>
+
+@Component()
+export class ContactDetailComponent {
+
+  contact: Contact;
+
+  constructor(
+    @Inject('contactsService') contactsService,
+    @Inject('$routeParams') $routeParams) {
+    this.contact = 
+      contactsService.getContact($routeParams.id);
+  }
+}
+</code></pre>
+        </section>
+
+
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code>
+
+@Component()
+export class ContactDetailComponent {
+
+  contact: Contact;
+
+  constructor(
+    <span style="color: #000;">@Inject('contactsService') contactsService</span>
+    @Inject('$routeParams') $routeParams) {
+    this.contact = 
+      contactsService.getContact($routeParams.id);
+  }
+}
+</foo-code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>upgradeAdapter.addProvider(ContactsService);
+          
+@Component()
+export class ContactDetailComponent {
+
+  contact: Contact;
+
+  constructor(
+    contactsService: ContactsService,
+    @Inject('$routeParams') $routeParams) {
+    this.contact = 
+      contactsService.getContact($routeParams.id);
+  }
+}
+</code></pre>
+        </section>
+
+        <section>
+          <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code><span style="color: #000;">upgradeAdapter.addProvider(ContactsService);</span>
+          
+@Component()
+export class ContactDetailComponent {
+
+  contact: Contact;
+
+  constructor(
+    <span style="color: #000;">contactsService: ContactsService</span>,
+    @Inject('$routeParams') $routeParams) {
+    this.contact = 
+      contactsService.getContact($routeParams.id);
+  }
+}
+</foo-code></pre>
+        </section>
+
+        <section class="statement-slide" data-background="#123742">
+          <h3 style="margin-left: 0.5em;">Demo: Downgrading A2 Providers</h3>
+          <h3 style="font-size: 1em; margin-top: 1em;margin-left: 0.6em; font-family: monospace;">$ git checkout step-6</h3>
+        </section>
+
+        <section class="thoughtram-slide" data-background="#f0f0f0">
+          <img alt="thoughtram brain" src="img/thoughtram-brain-black.png">
+          <img alt="Extend your memory." src="img/thoughtram-logo-line-with-tag-line.png">
+        </section>
+      </div>
+
+    </div>
+    <script src="js/app.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/reveal.config.js"></script>
+  </body>
+</html>
