@@ -182,9 +182,9 @@
           <p>For this to work, <strong>four things</strong> need to interoperate between Angular 1 and Angular 2:</p>
 
           <ul>
-            <li class="fragment"><strong>Dependency Injection</strong> - Exposing Angular 2 service into Angular 1 and vice-versa</li>
-            <li class="fragment"><strong>Component Nesting + Transcusion</strong> - Angular 1 directives with transclusion use Angular 2 components with content projection</li>
-            <li class="fragment"><strong>Change Detection</strong> - Angular 1 scope digest and Change Detectors in Angular 2 components are interleaved</li>
+            <li class="fragment"><strong>Dependency Injection</strong></li>
+            <li class="fragment"><strong>Component Nesting + Transcusion</strong></li>
+            <li class="fragment"><strong>Change Detection</strong></li>
           </ul>
           </div>
         </section>
@@ -267,7 +267,7 @@ export class ContactsListItemComponent {
           <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><code>import {upgradeAdapter} from 'upgrade-adapter';
 import {ContactsListItemComponent} from '...';
 
-angular.module('contacts-list-item-component')
+angular.module('contacts-list-item-component', [])
 
 .directive('contactsListItemComponent',
   upgradeAdapter
@@ -280,7 +280,7 @@ angular.module('contacts-list-item-component')
           <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code><span style="color: #000;">import {upgradeAdapter} from 'upgrade-adapter';
 import {ContactsListItemComponent} from '...';</span>
 
-angular.module('contacts-list-item-component')
+angular.module('contacts-list-item-component', [])
 
 .directive('contactsListItemComponent',
   upgradeAdapter
@@ -293,7 +293,7 @@ angular.module('contacts-list-item-component')
           <pre ng-non-bindable style="font-size: 0.85em; line-height: 40px;"><foo-code>import {upgradeAdapter} from 'upgrade-adapter';
 import {ContactsListItemComponent} from '...';
 
-angular.module('contacts-list-item-component')
+angular.module('contacts-list-item-component', [])
 
 <span style="color: #000;">.directive('contactsListItemComponent',
   upgradeAdapter
